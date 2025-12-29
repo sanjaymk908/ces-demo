@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TruKYC Auth Demo</title>
+    <script src="https://cdn.ably.com/lib/ably.min-1.js"></script>
+    <style>
+        body { margin: 0; background: #000; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+        img { max-width: 100%; height: auto; transition: opacity 0.8s ease; }
+    </style>
+</head>
+<body>
+    <img id="ui-state" src="paypal-loggedout.png">
+
+    <script>
+        // Use the Subscribe-Only Key for security
+        const ably = new Ably.Realtime("8v8e2w.ap3V9w:b1pcp2m6u3lVuNcNBPKdn0edfU034DRCs2jM4i4vLvg");
+        const channel = ably.channels.get("auth-status");
+
+        channel.subscribe("login-success", (message) => {
+            console.log("Auth Signal Received:", message.data);
+            const img = document.getElementById('ui-state');
+            
+            img.style.opacity = '0';
+            setTimeout(() => {
+                img.src = "paypal-loggedin.png";
+                img.style.opacity = '1';
+            }, 800);
+        });
+    </script>
+</body>
+</html>
