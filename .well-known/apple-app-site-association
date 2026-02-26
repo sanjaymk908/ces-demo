@@ -1,0 +1,13 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": ["33BJ727SMS.com.yella.TruKYCDemo"],
+        "components": [
+          { "/": "/openclaw*" }
+        ]
+      }
+    ]
+  }
+}
